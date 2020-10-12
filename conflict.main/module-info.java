@@ -1,4 +1,4 @@
 module conflict.main {
-    requires lib;
-    requires conflict.uselibconflict;
+    requires libconflict;
+    requires conflict.uselib;
 }

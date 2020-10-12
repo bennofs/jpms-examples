@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODULES="hello hello.conflict lib lib.conflict lib.main conflict.uselib conflict.uselibconflict conflict.main apinottransitive apinottransitive.main clone.main"
+MODULES="hello hello.conflict lib libconflict lib.main lib.reflectmain conflict.uselib conflict.main apinottransitive apinottransitive.main"
 # build modules
 for module in $MODULES; do
     mkdir -p classes/$module
     find $module -name "*.java" | xargs javac --module-path classes/ -d classes/$module
 done
 
-# build non-modular libs
-find conflict.uselib.clone -name '*.java' | xargs javac -cp classes/lib -d classes/conflict.uselib.clone
+# build non-modular main
+mkdir -p classes/lib.cpmain
+find lib.cpmain -name '*.java' | xargs javac -cp classes/lib -d classes/lib.cpmain
 
 # cleanup stale class files
 comm -23 \

@@ -1,0 +1,3 @@
+module libconflict {
+    exports lib;
+}
