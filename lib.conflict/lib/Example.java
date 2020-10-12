@@ -2,6 +2,6 @@ package lib;
 
 public class Example {
     public int randomInt() {
-        return 4;
+        return 1;
     }
 }
