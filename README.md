@@ -92,3 +92,20 @@ main module: unnamed module @4157f54e
 lib module: module libconflict
 ```
 
+Reflective access behaves the same: either there is already a loaded module providing the class, or the class is looked up in the classpath:
+
+```sh
+# taken from classpath
+$ java -cp classes/lib --module-path $PWD/classes -m lib.reflectmain/main.Main
+value: 4
+classloader equal: true
+main module: module lib.reflectmain
+lib module: unnamed module @38082d64
+# taken from already-loaded module
+$ java -cp classes/lib --module-path $PWD/classes --add-modules libconflict -m lib.reflectmain/
+main.Main
+value: 1
+classloader equal: true
+main module: module lib.reflectmain
+lib module: module libconflict
+```
